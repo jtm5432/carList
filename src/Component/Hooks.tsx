@@ -7,15 +7,16 @@ import { CarClass } from "../types/CarClass";  // CarClass 타입 임포트
 export const useCarClasses = () => {
   const [data, setData] = useState<CarClass[] | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<any | null>(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const carClasses = await getCarClasses();
         setData(carClasses);
       } catch (e) {
-        setError(e);
-      }
+        const error = e as Error;
+        setError(error.message);
+    }
       setLoading(false);
     };
 
@@ -24,3 +25,5 @@ export const useCarClasses = () => {
 
   return { data, loading, error };
 };
+
+

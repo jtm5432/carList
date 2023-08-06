@@ -3,4 +3,21 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  
 }
+
+  /* Chrome, Safari, newer versions of Opera */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* IE and Edge */
+  body {
+    -ms-overflow-style: none;
+  }
+
+  /* Firefox */
+  body {
+    scrollbar-width: none;
+  }
+
