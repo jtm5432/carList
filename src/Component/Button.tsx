@@ -5,16 +5,18 @@ type Filter = 'Button 1' | 'Button 2' | 'Button 3' | 'Button 4' | 'Button 5';
 
 type ButtonProps = {
     label: string;
-    isActive: boolean; // 활성 상태를 나타내는 prop
+    isActive?: boolean; // 활성 상태를 나타내는 prop
     onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   };
 const Button: React.FC<ButtonProps> = ({ label,isActive, onClick }) => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-   
+ 
     onClick?.(e); // e를 전달합니다.
   };
 
   const buttonStyle = {
+    padding: '10px',
+    margin: '0 5px', 
     backgroundColor: isActive ? 'blue' : 'white',
     color: isActive ? 'white' : 'black',
   };

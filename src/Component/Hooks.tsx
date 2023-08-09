@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { getCarClasses } from '../api/api';
 import { CarClass } from "../types/CarClass";  // CarClass 타입 임포트
 import { CarContextProps } from './Contexts/CarContexts'; // CarContextProps 타입 임포트
+
 const filterCarClasses = (carState: Record<string, boolean>, allCarClasses: any[], key: string) => {
   const trueCount = Object.values(carState).filter(value => value === true).length;
 
@@ -51,6 +52,7 @@ export const useCarClasses = (carContext: CarContextProps) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true); // 로딩 시작
       try {
        // console.log('state1',carContext)
         const allCarClasses = await getCarClasses();

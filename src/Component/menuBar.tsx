@@ -16,7 +16,6 @@ const MenuBar: React.FC = () => {
 
     //const SearchContext = { state1: {}, state2: 'value2', state3: 'value3', state4: 'value4', state5: 'value5' };
     const carContext = useCarContext();
-    const { data, loading, error } = useCarClasses(carContext);
    /*
     //경형/소형, 준중형, 중형/대형, 수입, SUV 
     const CarTypeArray = ["경형/소형", "준중형", "중형/대형", "수입", "SUV"]
@@ -113,6 +112,7 @@ const MenuBar: React.FC = () => {
     }
     return (
         <div className="menu-bar">
+            <div className="filter-container">
             {["차종", "지역", "가격",].map((label) => (
                 <Button
                     key={label}
@@ -134,6 +134,11 @@ const MenuBar: React.FC = () => {
                     isActive={carContext.activeButtons[label]}
                 />
             ))}
+              <Button
+                label="초기화"
+                onClick={carContext.resetStates()} // 초기화 함수 호출
+            />
+            </div>
             <Modal
                 isOpen={isModalOpen}
                 onClose={closeModal}
