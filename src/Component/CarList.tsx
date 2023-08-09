@@ -13,21 +13,26 @@ const CarListContent: React.FC = () => {
   const carContext = useCarContext();
   const { data, loading, error } = useCarClasses(carContext);
   const cars = data; // 또는 data를 원하는 형태로 변환
-
-  // 여기서 data는 cars 객체가 될 것입니다.
-
+  
   return (
     <>
       <MenuBar />
       {loading ? (
         <LoadingSpinner /> // 로딩 중이면 스피너를 보여줍니다.
       ) : (
-        cars && cars.map((car, index) => (
-          <CarItem key={index} car={car} />
-        ))
+        <>
+          {cars && cars.length > 0 ? (
+            cars.map((car, index) => (
+              <CarItem key={index} car={car} />
+            ))
+          ) : (
+            <p>선택하신 조건에 맞는 차량이 없습니다.</p>
+          )}
+        </>
       )}
     </>
   );
+  
 };
 
 const CarList: React.FC = () => {

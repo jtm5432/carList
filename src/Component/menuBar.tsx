@@ -117,6 +117,8 @@ const MenuBar: React.FC = () => {
                 <Button
                     key={label}
                     label={label}
+                    isCloseButton={true}
+                    onCloseModal={closeModal}
                     onClick={() => {
                         if (label === '차종') setModalContent("carType")
                         else if (label === '지역') setModalContent("areaType")

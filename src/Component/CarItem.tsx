@@ -10,31 +10,26 @@ const formatPrice = (price: number) => {
   return roundedPrice.toLocaleString();
 };
 
-const formatDistance = (distance: number) => {
-  if (distance >= 10000) return `${distance / 10000}만`;
-  if (distance >= 1000) return `${distance / 1000}천`;
-  return distance.toString();
-};
-
 const CarItem: React.FC<CarItemProps> = ({ car }) => {
+  const discountPrice = car.price - (car.price * car.discountPercent / 100);
+
   return (
-    <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px', maxWidth: '420px', margin: 'auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px', maxWidth: '420px', margin: 'auto', textAlign: 'left' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <img src={car.image} alt={car.carClassName} style={{ maxWidth: '200px' }} />
+        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+          <div>
+            <h2>{car.carClassName}</h2>
+            <p>{formatPrice(discountPrice)}원 (-{car.discountPercent}%)</p>
+          </div>
+          <div>
+            {car.carTypeTags.map((tag, index) => (
+              <span key={index} style={{ border: '1px solid #333', padding: '5px', marginRight: '5px', backgroundColor: 'yellow' }}>{tag}</span>
+            ))}
+          </div>
+        </div>
       </div>
-      <h2>{car.carClassName}</h2>
-      <p>Model: {car.carModel}</p>
-      <p>Year: {car.year}</p>
-      <p>Price: {formatPrice(car.price)} (Discount: {car.discountPercent}%)</p>
-      <p>Driving Distance: {formatDistance(car.drivingDistance)} km</p>
-      <div>
-        {car.carTypeTags.map((tag, index) => (
-          <span key={index} style={{ border: '1px solid #333', padding: '5px', marginRight: '5px' }}>{tag}</span>
-        ))}
-      </div>
-      <div>
-        Region Groups: {car.regionGroups.join(', ')}
-      </div>
+      <p>{car.year}년 | {formatPrice(car.drivingDistance)}km | {car.regionGroups.join(', ')}</p>
     </div>
   );
 };
