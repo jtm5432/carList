@@ -50,7 +50,7 @@
       -ms-overflow-style: auto; /* Internet Explorer 10+ */
     }
   }
-  
+    
   
   .filter-container::-webkit-scrollbar {
     display: none; /* Chrome, Safari */
